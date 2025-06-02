@@ -1,3 +1,4 @@
+const { groupRouter } = require("./groupRoute");
 const { userRouter } = require("./userRoute");
 
-module.exports = { userRouter }
+module.exports = { userRouter, groupRouter }

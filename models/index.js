@@ -1,3 +1,5 @@
+const groupSchema = require("./groupModel");
+const memberSchema = require("./memberModel");
 const userSchema = require("./userModel");
 
-module.exports = { userSchema }
+module.exports = { userSchema, groupSchema, memberSchema }
