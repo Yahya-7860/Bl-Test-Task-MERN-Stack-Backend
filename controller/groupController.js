@@ -30,4 +30,14 @@ const handleAddMember = async (req, res) => {
     }
 }
 
-module.exports = { handleGroupCreation, handleAddMember, handleGroupCreation };
+const handleGetAllGroups = async (req, res) => {
+    try {
+        const groups = await groupSchema.find();
+        res.status(200).json({ groups });
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error })
+    }
+}
+
+module.exports = { handleGroupCreation, handleAddMember, handleGroupCreation, handleGetAllGroups };

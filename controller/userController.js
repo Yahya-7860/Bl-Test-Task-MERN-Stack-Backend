@@ -25,7 +25,11 @@ const handleRegisterUser = async (req, res) => {
                 password: hashedPassword,
             });
 
-            res.status(201).json({ message: 'User registered successfully', newUser });
+            // res.status(201).json({ message: 'User registered successfully', newUser });
+            req.login(newUser, (err) => {
+                if (err) return res.status(500).json({ message: 'Login after registration failed' });
+                return res.status(201).json({ message: 'User registered and logged in', user: newUser });
+            });
         }
     } catch (err) {
         console.error('Register Error:', err);
