@@ -6,12 +6,23 @@ const { userRouter, groupRouter } = require('./routes');
 const app = express();
 const passport = require('passport')
 const session = require("express-session");
+const cors = require('cors');
 
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
 app.use(session({
     secret: "keyboard cat",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        sameSite: 'lax',
+    },
 }));
 app.use(passport.initialize());
 app.use(passport.session());

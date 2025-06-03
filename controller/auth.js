@@ -13,7 +13,11 @@ passport.use(new GoogleStrategy({
 },
     async (accessToken, refreshToken, profile, done) => {
         const existingUser = await userSchema.findOne({ email: profile.emails[0].value });
-        if (existingUser) return done(null, existingUser);
+        if (existingUser) {
+            return done(null, existingUser);
+        } else {
+            return done(null, false);
+        }
     }));
 
 passport.serializeUser((user, done) => done(null, user));
