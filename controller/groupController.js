@@ -17,12 +17,14 @@ const handleGroupCreation = async (req, res) => {
 }
 
 const handleAddMember = async (req, res) => {
-    const { memberName, email, groupId } = req.body;
-    if (!memberName || !email || !groupId) {
-        return res.status(400).json({ message: "all fields required" });
-    }
+    const { memberName, email } = req.body;
+    const { group_id } = req.params;
+
     try {
-        const newMember = await memberSchema.create({ memberName, email, groupId });
+        if (!memberName || !email || !group_id) {
+            return res.status(400).json({ message: "all fields required" });
+        }
+        const newMember = await memberSchema.create({ memberName, email, group_id });
         res.status(201).json({ message: "member added", newMember })
     } catch (error) {
         console.log("Error", error);
@@ -39,5 +41,15 @@ const handleGetAllGroups = async (req, res) => {
         res.status(500).json({ error })
     }
 }
+const handleGetOneGroup = async (req, res) => {
+    const { group_id } = req.params;
+    try {
+        const group = await groupSchema.findOne({ _id: group_id });
+        res.status(200).json({ group });
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error })
+    }
+}
 
-module.exports = { handleGroupCreation, handleAddMember, handleGroupCreation, handleGetAllGroups };
+module.exports = { handleGroupCreation, handleAddMember, handleGroupCreation, handleGetAllGroups, handleGetOneGroup };
