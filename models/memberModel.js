@@ -9,8 +9,9 @@ const memberModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    groupId: {
+    group_id: {
         type: String,
+        required: true
     }
 });
 

@@ -11,11 +11,11 @@ userRouter.get("/google/callback",
         failureRedirect: "http://localhost:5173/"
     })
 );
-userRouter.get("/logout", (req, res) => {
-    req.logout(() => {
-        res.redirect("http://localhost:5173/");
-    });
-});
+// userRouter.get("/logout", (req, res) => {
+//     req.logout(() => {
+//         res.redirect("http://localhost:5173/");
+//     });
+// });
 
 userRouter.get('/auth/user', (req, res) => {
     if (req.isAuthenticated()) {
@@ -25,6 +25,6 @@ userRouter.get('/auth/user', (req, res) => {
     }
 });
 
-//for registration manually
+
 userRouter.post('/register', handleRegisterUser);
 module.exports = { userRouter };
