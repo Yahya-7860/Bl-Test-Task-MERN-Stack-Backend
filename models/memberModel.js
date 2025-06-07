@@ -9,6 +9,12 @@ const memberModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    owe: {
+        type: Number
+    },
+    lent: {
+        type: Number
+    },
     group_id: {
         type: String,
         required: true

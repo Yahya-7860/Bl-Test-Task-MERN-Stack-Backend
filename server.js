@@ -2,7 +2,7 @@ require('dotenv').config();
 require('./controller/auth')
 const express = require('express')
 const mongoose = require('mongoose');
-const { userRouter, groupRouter } = require('./routes');
+const { userRouter, groupRouter, amountRouter } = require('./routes');
 const app = express();
 const passport = require('passport')
 const session = require("express-session");
@@ -46,4 +46,5 @@ DB_Connect();
 app.use(express.json());
 
 app.use('/', userRouter);
-app.use('/', groupRouter);   
+app.use('/', groupRouter);
+app.use('/', amountRouter);   
