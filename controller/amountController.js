@@ -21,4 +21,15 @@ const handleAmount = async (req, res) => {
     }
 }
 
-module.exports = { handleAmount };
+const handleAmountSettle = async (req, res) => {
+    const { member_id } = req.body;
+
+    try {
+        await memberSchema.findOneAndUpdate({ _id: member_id }, { owe: 0, lent: 0 });
+        res.status(200).json({ message: "settled" })
+    } catch (error) {
+        res.status(500).json({ message: "server error", error })
+    }
+}
+
+module.exports = { handleAmount, handleAmountSettle };

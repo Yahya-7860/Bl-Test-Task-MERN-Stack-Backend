@@ -25,6 +25,10 @@ const handleAddMember = async (req, res) => {
         if (!memberName || !email || !group_id) {
             return res.status(400).json({ message: "all fields required" });
         }
+        const EmailExist = await memberSchema.findOne({ email, group_id })
+        if (EmailExist) {
+            return res.status(400).json({ message: "already registered" })
+        }
         const newMember = await memberSchema.create({ memberName, email, owe: 0, lent: 0, group_id });
         await sendMail(AuthUserEmail, AuthUserName, email, groupName)
         res.status(201).json({ message: "member added", newMember })
